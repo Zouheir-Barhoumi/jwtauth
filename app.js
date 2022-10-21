@@ -10,13 +10,10 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 // DB CONNECTION
-const uri = "";
+const uri =
+  "mongodb+srv://zuh:nznr8VPwRwC08a2y@cluster0.wujmzhw.mongodb.net/node-auth";
 mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
+  .connect(uri)
   .then((res) => app.listen(3000))
   .catch((err) => console.log(err));
 
