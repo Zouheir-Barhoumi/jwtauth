@@ -1,10 +1,12 @@
 const express = require("express"),
-  mongoose = require("mongoose");
+  mongoose = require("mongoose"),
+  authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
-//   MIDDLEWARE to serve static files to the browser
-app.use(express.static("public"));
+//   MIDDLEWARE
+app.use(express.static("public")); // to serve static files to the browser
+app.use(express.json());
 
 // VIEW ENGINE
 app.set("view engine", "ejs");
@@ -20,3 +22,4 @@ mongoose
 // ROUTES
 app.get("/", (req, res) => res.render("home"));
 app.get("/posts", (req, res) => res.render("posts"));
+app.use(authRoutes);
