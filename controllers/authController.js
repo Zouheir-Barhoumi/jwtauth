@@ -15,7 +15,7 @@ module.exports.login_post = async (req, res) => {
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id);
-    res.cookie("JWT", token, { httpOnly: true, maxAge: MaxAge * 1000 });
+    res.cookie("jwt", token, { httpOnly: true, maxAge: MaxAge * 1000 });
     res.status(200).json({ user: user._id });
   } catch (err) {
     const errors = handleErrors(err);
@@ -31,7 +31,7 @@ module.exports.signup_post = async (req, res) => {
   try {
     const user = await User.create({ email, password });
     const token = createToken(user._id);
-    res.cookie("JWT", token, { httpOnly: true, maxAge: MaxAge * 1000 });
+    res.cookie("jwt", token, { httpOnly: true, maxAge: MaxAge * 1000 });
     res.status(201).json({ user: user._id });
   } catch (err) {
     const errors = handleErrors(err);
@@ -78,4 +78,9 @@ const createToken = (id) => {
     "I know half of you half as well as I should like, and I like less than half of you half as well as you deserve.",
     { expiresIn: MaxAge }
   );
+};
+
+module.exports.logout_get = (req, res) => {
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.redirect("/");
 };
