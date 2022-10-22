@@ -1,5 +1,6 @@
 const User = require("../models/User"),
   JWT = require("jsonwebtoken");
+require("dotenv").config({ path: ".env" });
 
 const MaxAge = 60 * 60 * 24 * 3;
 
@@ -73,11 +74,7 @@ const handleErrors = (err) => {
 
 const createToken = (id) => {
   // JWT.sign(payload, secret, options)
-  return JWT.sign(
-    { id },
-    "I know half of you half as well as I should like, and I like less than half of you half as well as you deserve.",
-    { expiresIn: MaxAge }
-  );
+  return JWT.sign({ id }, process.env.SALT, { expiresIn: MaxAge });
 };
 
 module.exports.logout_get = (req, res) => {
