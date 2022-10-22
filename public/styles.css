@@ -128,11 +128,12 @@ form h2 {
   margin-bottom: 4rem;
 }
 form {
-  width: 36rem;
+  width: 38rem;
   margin: 0 auto;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
   background: #fff;
+  padding: 3rem;
 }
 
 input {
